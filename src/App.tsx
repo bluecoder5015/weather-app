@@ -13,16 +13,20 @@ const App = () => {
   });
 
   // Handle location change
-  const handleLocationChange = () => {
+  const handleLocationChange = (e: React.FormEvent) => {
+    e.preventDefault();
     if (inputRef?.current?.value) {
       setLocation(inputRef.current.value);
-      inputRef.current.value = ""; 
+      inputRef.current.value = "";
     }
   };
 
   return (
     <div className="h-screen flex items-center justify-center flex-col bg-gradient-to-r from-blue-500 to-purple-700">
-      <div className="mb-8 flex items-center gap-2">
+      <form
+        onSubmit={handleLocationChange}
+        className="mb-8 flex items-center gap-2"
+      >
         <input
           type="text"
           ref={inputRef}
@@ -30,12 +34,12 @@ const App = () => {
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
         />
         <button
-          onClick={handleLocationChange}
+          type="submit"
           className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-500 transition duration-300"
         >
           Submit
         </button>
-      </div>
+      </form>
 
       <div className="glass-card flex flex-col items-center justify-center p-6 w-80 h-72 rounded-xl shadow-lg">
         {/* Loading, Error, and Data Display Logic */}
